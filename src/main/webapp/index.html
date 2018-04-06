@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Spring Course</title>
+</head>
+<body>
+    <div>Task1</div>
+    <div>
+        <span>Ticket price</span>
+        <a href="http://localhost:8090/getTicketPrice?eventName=The%20revenant&auditorium=Yellow%20hall&dateTime=2016-02-05T21:18:00&seats=2&seats=8&seats=9&seats=3&userEmail=dmitriy.vbabichev@gmail.com">Get Ticket Price</a>
+    </div>
+    <br>
+    <div>
+        <span>List of tickets for event</span>
+        <a href="http://localhost:8090/getTicketsForEvent?eventName=The revenant&auditorium=Yellow hall&dateEvent=2016-02-05T21:18:00">Get Tickets For Event</a>
+    </div>
+    <br>
+    <form action="/users/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Chose file users.json:</label>
+        <input type="file" name="jsonFile" id="file" />
+        <br>
+        <input type="submit" name="submit" value="Submit" />
+    </form>
+    <br>
+    <div>
+        <span>Get users by name Dmytro Babichev</span>
+        <a href="http://localhost:8090/users/list?name=Dmytro Babichev">Get users by name</a>
+    </div>
+
+    <div>
+        <span>Retrieve user with email dmitriy.vbabichev@gmail.com</span>
+        <a href="http://localhost:8090/users/getByEmail?email=dmitriy.vbabichev@gmail.com">Find user dmitriy.vbabichev@gmail.com</a>
+    </div>
+
+</body>
+</html>

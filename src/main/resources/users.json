@@ -1,0 +1,12 @@
+[
+  {
+    "id": 20,
+    "email": "test@gmail.com",
+    "name": "Test User",
+    "birthday": [
+      1995,
+      2,
+      17
+    ]
+  }
+]
