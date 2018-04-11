@@ -4,8 +4,12 @@ import beans.daos.mocks.UserDAOMock;
 import beans.models.User;
 import beans.services.UserService;
 import beans.services.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 
@@ -16,7 +20,12 @@ import java.util.Arrays;
  * Time: 1:36 PM
  */
 @Configuration
+@ImportResource({"classpath:spring-security.xml"})
 public class TestUserServiceConfiguration {
+
+    @Autowired
+    @Qualifier("passwordEncoder")
+    PasswordEncoder passwordEncoder;
 
     @Bean
     public User testUser1() {
@@ -35,6 +44,8 @@ public class TestUserServiceConfiguration {
 
     @Bean(name = "testUserServiceImpl")
     public UserService userServiceImpl() {
-        return new UserServiceImpl(userDAO());
+        UserService userService = new UserServiceImpl(userDAO());
+        userService.setPasswordEncoder(passwordEncoder);
+        return userService;
     }
 }

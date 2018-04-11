@@ -1,0 +1,39 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="beans.services"/>
+
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/" access="permitAll"/>
+        <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/admin" access="hasRole('BOOKING_MANAGER')"/>
+        <intercept-url pattern="/welcome" access="hasAnyRole('BOOKING_MANAGER','REGISTERED_USER')"/>
+        <form-login login-page="/login"
+                    default-target-url="/welcome"
+                    username-parameter="email" password-parameter="password"
+                    authentication-failure-url="/login"
+                    login-processing-url="/spring_security_check"/>
+        <access-denied-handler error-page="/accessDenied"/>
+        <logout logout-success-url="/login"/>
+        <!--<remember-me remember-me-parameter="remember-me" remember-me-cookie="my-remember-me"
+                     user-service-ref="userDetailsService" token-validity-seconds="10000"/>-->
+        <csrf disabled="true"/>
+    </http>
+
+    <beans:bean id="passwordEncoder" name="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <beans:property name="userDetailsService" ref="userDetailsService"/>
+        <beans:property name="passwordEncoder" ref="passwordEncoder"/>
+    </beans:bean>
+
+    <authentication-manager>
+        <authentication-provider ref="daoAuthenticationProvider"/>
+    </authentication-manager>
+</beans:beans>

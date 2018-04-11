@@ -6,6 +6,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -48,7 +50,7 @@ public class UserController {
         if(CollectionUtils.isEmpty(users)) {
             users = Collections.emptyList();
         }
-        model.addAttribute("users",users);
+        model.addAttribute("users", users);
         return "list-users";
     }
 

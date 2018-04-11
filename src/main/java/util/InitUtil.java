@@ -35,6 +35,7 @@ public class InitUtil implements ApplicationContextAware {
 
         String email = "dmitriy.vbabichev@gmail.com";
         String name = "Dmytro Babichev";
+        String pass = "pass";
         String eventName = "The revenant";
         String auditoriumName = "Blue hall";
         Auditorium blueHall = auditoriumService.getByName(auditoriumName);
@@ -42,8 +43,15 @@ public class InitUtil implements ApplicationContextAware {
         Auditorium redHall = auditoriumService.getByName("Red hall");
         LocalDateTime dateOfEvent = LocalDateTime.of(LocalDate.of(2016, 2, 5), LocalTime.of(15, 45, 0));
 
-        userService.register(new User(email, name, LocalDate.now()));
-        userService.register(new User("laory@yandex.ru", name, LocalDate.of(1992, 4, 29)));
+        //userService.register(new User(email, name, LocalDate.now(), pass));
+        //userService.register(new User("laory@yandex.ru", name, LocalDate.of(1992, 4, 29), "pass123"));
+
+        userService.register(new User(email, name, LocalDate.now(), pass,"REGISTERED_USER"));
+        userService.register(new User("laory@yandex.ru", name, LocalDate.of(1992, 4, 29),"123","REGISTERED_USER"));
+        userService.register(new User("test@yandex.ru", "Petr", LocalDate.of(1992, 4, 29),"124","REGISTERED_USER"));
+        userService.register(new User("admin@gmail.com", "admin", LocalDate.of(1992, 5, 29),"125","REGISTERED_USER,BOOKING_MANAGER"));
+        userService.register(new User("admin1@gmail.com", "admin1", LocalDate.of(1992, 6, 29),"126","REGISTERED_USER,BOOKING_MANAGER"));
+        userService.register(new User("admin2@gmail.com", "admin2", LocalDate.of(1992, 7, 29),"127","REGISTERED_USER,BOOKING_MANAGER"));
 
         User userByEmail = userService.getUserByEmail(email);
         userService.getUsersByName(name).forEach(System.out:: println);

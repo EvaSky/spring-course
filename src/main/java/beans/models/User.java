@@ -1,6 +1,7 @@
 package beans.models;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,6 +15,8 @@ public class User {
     private String    email;
     private String    name;
     private LocalDate birthday;
+    private String password;
+    private String roles;
 
     public User() {
     }
@@ -23,6 +26,21 @@ public class User {
         this.email = email;
         this.name = name;
         this.birthday = birthday;
+    }
+
+    public User(String email, String name, LocalDate birthday, String password) {
+        this.email = email;
+        this.name = name;
+        this.birthday = birthday;
+        this.password = password;
+    }
+
+    public User(String email, String name, LocalDate birthday, String password, String roles) {
+        this.email = email;
+        this.name = name;
+        this.birthday = birthday;
+        this.password = password;
+        this.roles = roles;
     }
 
     public User(String email, String name, LocalDate birthday) {
@@ -63,6 +81,22 @@ public class User {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     @Override

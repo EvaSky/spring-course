@@ -2,6 +2,8 @@ package beans.services;
 
 import beans.models.Ticket;
 import beans.models.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -24,4 +26,8 @@ public interface UserService {
     List<User> getUsersByName(String name);
 
     List<Ticket> getBookedTickets();
+
+    PasswordEncoder getPasswordEncoder();
+
+    void setPasswordEncoder(PasswordEncoder passwordEncoder);
 }

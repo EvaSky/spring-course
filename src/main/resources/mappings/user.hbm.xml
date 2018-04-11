@@ -19,6 +19,11 @@
         <property name="email" column="EMAIL" type="string" unique="true"/>
         <property name="name" column="NAME" type="string"/>
         <property name="birthday" type="java.time.LocalDate" column="EVENT_DATE"/>
+        <property name="password" type="java.lang.String" column="PASSWORD"/>
+        <property name="roles" type="java.lang.String">
+            <column name="ROLES" not-null="false" default="'REGISTERED_USER'" />
+        </property>
+
     </class>
 
 </hibernate-mapping>
