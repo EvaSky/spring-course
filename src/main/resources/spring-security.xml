@@ -10,8 +10,8 @@
     <context:component-scan base-package="beans.services"/>
 
     <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
         <intercept-url pattern="/admin" access="hasRole('BOOKING_MANAGER')"/>
         <intercept-url pattern="/welcome" access="hasAnyRole('BOOKING_MANAGER','REGISTERED_USER')"/>
         <form-login login-page="/login"
@@ -21,8 +21,7 @@
                     login-processing-url="/spring_security_check"/>
         <access-denied-handler error-page="/accessDenied"/>
         <logout logout-success-url="/login"/>
-        <!--<remember-me remember-me-parameter="remember-me" remember-me-cookie="my-remember-me"
-                     user-service-ref="userDetailsService" token-validity-seconds="10000"/>-->
+        <remember-me key="uniqueAndSecret" user-service-ref="userDetailsService" token-validity-seconds="86400"/>
         <csrf disabled="true"/>
     </http>
 

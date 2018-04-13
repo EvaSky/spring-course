@@ -20,12 +20,7 @@ import java.util.Arrays;
  * Time: 1:36 PM
  */
 @Configuration
-@ImportResource({"classpath:spring-security.xml"})
 public class TestUserServiceConfiguration {
-
-    @Autowired
-    @Qualifier("passwordEncoder")
-    PasswordEncoder passwordEncoder;
 
     @Bean
     public User testUser1() {
@@ -44,8 +39,6 @@ public class TestUserServiceConfiguration {
 
     @Bean(name = "testUserServiceImpl")
     public UserService userServiceImpl() {
-        UserService userService = new UserServiceImpl(userDAO());
-        userService.setPasswordEncoder(passwordEncoder);
-        return userService;
+        return new UserServiceImpl(userDAO());
     }
 }

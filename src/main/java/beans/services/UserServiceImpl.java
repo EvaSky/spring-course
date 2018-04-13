@@ -63,12 +63,4 @@ public class UserServiceImpl implements UserService {
     public List<Ticket> getBookedTickets() {
         throw new UnsupportedOperationException("not implemented yet");
     }
-
-    public PasswordEncoder getPasswordEncoder() {
-        return passwordEncoder;
-    }
-
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
 }

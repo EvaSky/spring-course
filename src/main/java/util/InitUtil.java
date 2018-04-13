@@ -48,7 +48,7 @@ public class InitUtil implements ApplicationContextAware {
 
         userService.register(new User(email, name, LocalDate.now(), pass,"REGISTERED_USER"));
         userService.register(new User("laory@yandex.ru", name, LocalDate.of(1992, 4, 29),"123","REGISTERED_USER"));
-        userService.register(new User("test@yandex.ru", "Petr", LocalDate.of(1992, 4, 29),"124","REGISTERED_USER"));
+        userService.register(new User("user@gmail.com", "user", LocalDate.of(1992, 4, 29),"124","REGISTERED_USER"));
         userService.register(new User("admin@gmail.com", "admin", LocalDate.of(1992, 5, 29),"125","REGISTERED_USER,BOOKING_MANAGER"));
         userService.register(new User("admin1@gmail.com", "admin1", LocalDate.of(1992, 6, 29),"126","REGISTERED_USER,BOOKING_MANAGER"));
         userService.register(new User("admin2@gmail.com", "admin2", LocalDate.of(1992, 7, 29),"127","REGISTERED_USER,BOOKING_MANAGER"));

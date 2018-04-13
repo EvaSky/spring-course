@@ -26,8 +26,4 @@ public interface UserService {
     List<User> getUsersByName(String name);
 
     List<Ticket> getBookedTickets();
-
-    PasswordEncoder getPasswordEncoder();
-
-    void setPasswordEncoder(PasswordEncoder passwordEncoder);
 }
