@@ -23,6 +23,7 @@
         <property name="roles" type="java.lang.String">
             <column name="ROLES" not-null="false" default="'REGISTERED_USER'" />
         </property>
+        <one-to-one name="account" class="beans.models.UserAccount" cascade="all"/>
 
     </class>
 

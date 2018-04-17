@@ -17,6 +17,7 @@ public class User {
     private LocalDate birthday;
     private String password;
     private String roles;
+    private UserAccount account;
 
     public User() {
     }
@@ -97,6 +98,14 @@ public class User {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public UserAccount getAccount() {
+        return account;
+    }
+
+    public void setAccount(UserAccount account) {
+        this.account = account;
     }
 
     @Override
