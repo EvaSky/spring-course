@@ -8,19 +8,19 @@ import org.springframework.stereotype.Repository;
 @Repository(value = "userAccountDAO")
 public class UserAccountDAOImpl extends AbstractDAO implements UserAccountDAO {
 
-
     @Override
     public UserAccount create(UserAccount account) {
-        return null;
+        getCurrentSession().saveOrUpdate(account);
+        return account;
     }
 
     @Override
-    public void delete(UserAccount user) {
-
+    public void delete(UserAccount userAccount) {
+        getCurrentSession().delete(userAccount);
     }
 
     @Override
     public UserAccount get(long userId) {
-        return null;
+        return getCurrentSession().get(UserAccount.class, userId);
     }
 }

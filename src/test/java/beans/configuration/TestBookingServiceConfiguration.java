@@ -65,13 +65,13 @@ public class TestBookingServiceConfiguration {
 
     @Bean
     public Event testEvent1() {
-        return new Event(1, "Test event", beans.models.Rate.HIGH, 124.0, java.time.LocalDateTime.of(2016, 2, 6, 14, 45, 0),
+        return new Event(1, "Test event", beans.models.Rate.HIGH, 124.0, 200.0, java.time.LocalDateTime.of(2016, 2, 6, 14, 45, 0),
                          testHall1());
     }
 
     @Bean
     public Event testEvent2() {
-        return new Event(2, "Test event2", Rate.MID, 500.0, java.time.LocalDateTime.of(2016, 12, 6, 9, 35, 0),
+        return new Event(2, "Test event2", Rate.MID, 500.0, 600.0, java.time.LocalDateTime.of(2016, 12, 6, 9, 35, 0),
                          testHall2());
     }
 
@@ -133,9 +133,14 @@ public class TestBookingServiceConfiguration {
         return new UserServiceImpl(userDAOMock());
     }
 
+    @Bean
+    public BookingFacade bookingFacade() {
+        return new BookingFacade();
+    }
+
     @Bean(name = "testBookingServiceImpl")
     public BookingService bookingServiceImpl() {
         return new BookingServiceImpl(eventServiceImpl(), auditoriumServiceImpl(), userServiceImpl(),
-                                      discountBookingServiceImpl(), bookingBookingDAO(), 1, 2, 1.2, 1);
+                                      discountBookingServiceImpl(), bookingBookingDAO(), bookingFacade(), 1, 2, 1.2, 1);
     }
 }

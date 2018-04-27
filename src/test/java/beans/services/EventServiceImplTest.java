@@ -57,7 +57,7 @@ public class EventServiceImplTest {
     @Qualifier("testHall2")
     Auditorium auditorium2;
 
-    private final Event testEvent = new Event(UUID.randomUUID().toString(), Rate.HIGH, 1321, LocalDateTime.now(),
+    private final Event testEvent = new Event(UUID.randomUUID().toString(), Rate.HIGH, 1321, 1500, LocalDateTime.now(),
                                                      null);
 
     @Autowired
@@ -172,7 +172,7 @@ public class EventServiceImplTest {
         eventService.assignAuditorium(event, testEvent.getAuditorium(), testEvent.getDateTime());
         List<Event> after = eventService.getAll();
         before.remove(event);
-        before.add(new Event(event.getId(), event.getName(), event.getRate(), event.getBasePrice(),
+        before.add(new Event(event.getId(), event.getName(), event.getRate(), event.getBasePrice(), event.getTicketPrice(),
                              testEvent.getDateTime(), testEvent.getAuditorium()));
         System.out.println("before = " + before);
         System.out.println("after = " + after);

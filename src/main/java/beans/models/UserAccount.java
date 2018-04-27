@@ -4,7 +4,14 @@ public class UserAccount {
 
     private long userId;
     private User user;
-    private double amountMoney;
+    private Double amountMoney;
+
+    public UserAccount() {
+    }
+
+    public UserAccount(double amountMoney) {
+        this.amountMoney = amountMoney;
+    }
 
     public long getUserId() {
         return userId;
@@ -14,11 +21,11 @@ public class UserAccount {
         this.userId = userId;
     }
 
-    public double getAmountMoney() {
+    public Double getAmountMoney() {
         return amountMoney;
     }
 
-    public void setAmountMoney(double amountMoney) {
+    public void setAmountMoney(Double amountMoney) {
         this.amountMoney = amountMoney;
     }
 
@@ -28,5 +35,13 @@ public class UserAccount {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "UserAccount{" +
+                "userId=" + userId +
+                ", amountMoney=" + amountMoney +
+                '}';
     }
 }

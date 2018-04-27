@@ -16,25 +16,27 @@ public class Event {
     private double        basePrice;
     private LocalDateTime dateTime;
     private Auditorium    auditorium;
+    private double        ticketPrice;
 
     public Event() {
     }
 
-    public Event(String name, Rate rate, double basePrice, LocalDateTime dateTime, Auditorium auditorium) {
-        this(-1, name, rate, basePrice, dateTime, auditorium);
+    public Event(String name, Rate rate, double basePrice, double ticketPrice, LocalDateTime dateTime, Auditorium auditorium) {
+        this(-1, name, rate, basePrice, ticketPrice, dateTime, auditorium);
     }
 
-    public Event(long id, String name, Rate rate, double basePrice, LocalDateTime dateTime, Auditorium auditorium) {
+    public Event(long id, String name, Rate rate, double basePrice, double ticketPrice, LocalDateTime dateTime, Auditorium auditorium) {
         this.id = id;
         this.name = name;
         this.rate = rate;
         this.basePrice = basePrice;
         this.dateTime = dateTime;
         this.auditorium = auditorium;
+        this.ticketPrice = ticketPrice;
     }
 
     public Event withId(Long eventId) {
-        return new Event(eventId, this.name, this.rate, this.basePrice, this.dateTime, this.auditorium);
+        return new Event(eventId, this.name, this.rate, this.basePrice, this.ticketPrice, this.dateTime, this.auditorium);
     }
 
     public long getId() {
@@ -85,6 +87,14 @@ public class Event {
         this.auditorium = auditorium;
     }
 
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(double ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -97,6 +107,8 @@ public class Event {
         if (id != event.id)
             return false;
         if (Double.compare(event.basePrice, basePrice) != 0)
+            return false;
+        if (Double.compare(event.ticketPrice, ticketPrice) != 0)
             return false;
         if (name != null ? !name.equals(event.name) : event.name != null)
             return false;
@@ -117,6 +129,8 @@ public class Event {
         result = 31 * result + (rate != null ? rate.hashCode() : 0);
         temp = Double.doubleToLongBits(basePrice);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(ticketPrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (dateTime != null ? dateTime.hashCode() : 0);
         result = 31 * result + (auditorium != null ? auditorium.hashCode() : 0);
         return result;
@@ -129,6 +143,7 @@ public class Event {
                ", name='" + name + '\'' +
                ", rate=" + rate +
                ", basePrice=" + basePrice +
+               ", ticketPrice=" + ticketPrice +
                ", dateTime=" + dateTime +
                ", auditorium=" + auditorium +
                '}';

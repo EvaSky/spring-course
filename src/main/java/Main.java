@@ -23,7 +23,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+        /*ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 
         AuditoriumService auditoriumService = (AuditoriumService) ctx.getBean("auditoriumServiceImpl");
         BookingService bookingService = (BookingService) ctx.getBean("bookingServiceImpl");
@@ -131,6 +131,6 @@ public class Main {
         System.out.println();
         System.out.println("DiscountAspect.getDiscountStatistics() = " + DiscountAspect.getDiscountStatistics());
         System.out.println();
-        System.out.println("LuckyWinnerAspect.getLuckyUsers() = " + LuckyWinnerAspect.getLuckyUsers());
+        System.out.println("LuckyWinnerAspect.getLuckyUsers() = " + LuckyWinnerAspect.getLuckyUsers());*/
     }
 }

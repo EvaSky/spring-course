@@ -159,6 +159,8 @@
             <version>${spring-security.ver}</version>
         </dependency>
 
+        <!--web services-->
+
     </dependencies>
 
     <build>

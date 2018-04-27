@@ -1,10 +1,10 @@
-package beans.daos;
+package beans.services;
 
 import beans.models.UserAccount;
 
-public interface UserAccountDAO {
+public interface UserAccountService {
 
-    UserAccount create(UserAccount account);
+    UserAccount save(UserAccount account);
 
     void delete(UserAccount account);
 

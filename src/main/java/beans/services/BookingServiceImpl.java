@@ -31,6 +31,7 @@ public class BookingServiceImpl implements BookingService {
     private final UserService       userService;
     private final BookingDAO        bookingDAO;
     private final DiscountService   discountService;
+    private final BookingFacade     bookingFacade;
     final         int               minSeatNumber;
     final         double            vipSeatPriceMultiplier;
     final         double            highRatedPriceMultiplier;
@@ -42,6 +43,7 @@ public class BookingServiceImpl implements BookingService {
                               @Qualifier("userServiceImpl") UserService userService,
                               @Qualifier("discountServiceImpl") DiscountService discountService,
                               @Qualifier("bookingDAO") BookingDAO bookingDAO,
+                              @Qualifier("bookingFacade") BookingFacade bookingFacade,
                               @Value("${min.seat.number}") int minSeatNumber,
                               @Value("${vip.seat.price.multiplier}") double vipSeatPriceMultiplier,
                               @Value("${high.rate.price.multiplier}") double highRatedPriceMultiplier,
@@ -50,6 +52,7 @@ public class BookingServiceImpl implements BookingService {
         this.auditoriumService = auditoriumService;
         this.userService = userService;
         this.bookingDAO = bookingDAO;
+        this.bookingFacade = bookingFacade;
         this.discountService = discountService;
         this.minSeatNumber = minSeatNumber;
         this.vipSeatPriceMultiplier = vipSeatPriceMultiplier;
@@ -141,11 +144,20 @@ public class BookingServiceImpl implements BookingService {
         boolean seatsAreAlreadyBooked = bookedTickets.stream().filter(bookedTicket -> ticket.getSeatsList().stream().filter(
                 bookedTicket.getSeatsList() :: contains).findAny().isPresent()).findAny().isPresent();
 
-        if (!seatsAreAlreadyBooked)
+        double ticketPrice = ticket.getEvent().getTicketPrice();
+        UserAccount account = user.getAccount();
+        double balance = bookingFacade.checkBalance(account);
+        if (balance - ticketPrice < 0) {
+            System.err.println("ERROR: There isn't enough money in the account " + account + " for booking ticket with price " + ticketPrice);
+            return null;
+        }
+        if (!seatsAreAlreadyBooked) {
             bookingDAO.create(user, ticket);
-        else
+            bookingFacade.withdraw(ticketPrice, account);
+        }
+        else {
             throw new IllegalStateException("Unable to book ticket: [" + ticket + "]. Seats are already booked.");
-
+        }
         return ticket;
     }
 
