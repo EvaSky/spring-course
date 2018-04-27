@@ -1,5 +1,9 @@
 package beans.models;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import java.time.LocalDateTime;
 
 /**
@@ -8,12 +12,15 @@ import java.time.LocalDateTime;
  * Date: 2/1/2016
  * Time: 7:42 PM
  */
+@XmlRootElement( name = "Event" )
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Event {
 
     private long          id;
     private String        name;
     private Rate          rate;
     private double        basePrice;
+    @XmlSchemaType(name="dateTime")
     private LocalDateTime dateTime;
     private Auditorium    auditorium;
     private double        ticketPrice;

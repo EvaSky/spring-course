@@ -1,7 +1,15 @@
+
 package beans.models;
 
+import util.DateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapters;
 import java.time.LocalDate;
-import java.util.Objects;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,11 +17,15 @@ import java.util.Objects;
  * Date: 2/1/2016
  * Time: 7:35 PM
  */
+@XmlRootElement( name = "User" )
+@XmlAccessorType(XmlAccessType.FIELD)
 public class User {
 
     private long      id;
     private String    email;
     private String    name;
+    @XmlSchemaType(name="date")
+    @XmlJavaTypeAdapter(type=LocalDate.class,  value=DateAdapter.class)
     private LocalDate birthday;
     private String password;
     private String roles;
